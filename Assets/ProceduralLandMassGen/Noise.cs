@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public static class Noise
-{
+{                                     
     public static float[,] generateNoiseMap(int mapWidth, int mapHeight,int seed, float scale, int octaves, float persistance, float lacunarity, Vector2 offset)
     {
         float[,] noiseMap = new float[mapWidth, mapHeight];
@@ -68,6 +68,6 @@ public static class Noise
                 noiseMap[x, y] = Mathf.InverseLerp(minNoiseHeight, maxNoiseHeight, noiseMap[x, y]);
             }
         }
-                return noiseMap;
+        return noiseMap;
     }
 }

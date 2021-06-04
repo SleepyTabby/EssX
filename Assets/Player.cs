@@ -4,37 +4,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    /*
-     overview
-    rotate board with animations 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-     */
     [Header("Board")]
     [SerializeField] GameObject boardobj;
     [SerializeField] Rigidbody boardrbg;
@@ -44,10 +13,8 @@ public class Player : MonoBehaviour
     [SerializeField] float rotSpeed;
     [SerializeField] float cornerSpeed;
     [SerializeField] float cornerStopSpeed;
-    bool rotateControlls; //if you rotate to far the player turns and changes controlls
     [SerializeField] int rotationAccuracy;
     [SerializeField] Vector2 minmaxAnglesL;
-    [SerializeField] float[] turnAngles; //only set the max and minimum and in between get interpolated 
 
     [Header("SmoothAnimation")]
     [SerializeField] Transform idle;
@@ -56,24 +23,18 @@ public class Player : MonoBehaviour
     [SerializeField] Transform anker;
     bool[] currentInputs = {false, false, false, false };
 
-    //animation manager
-    //[Header("SmoothAnimation")]
-    //keyframes interpolated provide rotations and if you want locations  
-    //search trough the keyframes 
-    //[SerializeField] List<Quaternion, Vector3> KeyFrames = new System.Collections.Generic.List<Quaternion[], Vector3[]>();
-
     void Start()
     {
         InterpolateAngles();
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         InputHandler();
         PhysicsHandler();
     }
-    //add tricks and shit 
+
 
     void InputHandler()
     {
@@ -124,8 +85,6 @@ public class Player : MonoBehaviour
         if (currentInputs[1])//a
         {
             transform.rotation = Quaternion.Slerp(boardobj.transform.rotation, left.rotation, 1);
-            //transform.forward = 
-            //    transform.up
         }
 
         if (currentInputs[2])//s
@@ -139,10 +98,9 @@ public class Player : MonoBehaviour
         }
     }
 
-    //make a procedurally generated music maker 
+
     void PhysicsHandler()
-    {//implement animations stages same way as the speed
-        // boardrbg
+    { 
         if (currentInputs[0])//w
         {
             boardrbg.AddRelativeForce(Vector3.left * speed * Time.deltaTime, ForceMode.Force);
@@ -233,5 +191,6 @@ public class Player : MonoBehaviour
             }
         }
     }
+
     //increase score the long player is in the air 
 }
