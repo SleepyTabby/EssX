@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
     [SerializeField] Transform left;
     [SerializeField] Transform right;
     [SerializeField] Transform anker;
-    bool[] currentInputs = {false, false, false, false };
+    bool[] currentInputs = { false, false, false, false };
 
     void Start()
     {
@@ -32,8 +32,14 @@ public class Player : MonoBehaviour
     void Update()
     {
         InputHandler();
-        PhysicsHandler();
+
     }
+
+    void FixedUpdate()
+    {
+    PhysicsHandler(); 
+    }
+
 
 
     void InputHandler()
@@ -136,7 +142,11 @@ public class Player : MonoBehaviour
 
         //automatic physics aplication when turning     make sure these will react to the landscape rotation find out how 
         //only perform when in the parameters
-        speed += (speed * 0.04f) * Time.deltaTime;
+        if (speed <= 40000)
+        {
+            speed += (speed * 0.04f) * Time.deltaTime;
+        }
+       
         boardrbg.AddRelativeForce(Vector3.right * speed * Time.deltaTime, ForceMode.Force);
         for (int i = 1; i < (int)(turnAngles.Length * 0.5f); i++)
         {//right
